@@ -40,6 +40,10 @@ The purpose of this data construction is to build data to compare query performa
 0.11_table_cnt.sh : 테이블 데이터 row 비교 \
 crt_function.sql : 0.04_create_func.sh 에서 사용되는 create function 구문의 파일 
 
-본 데이터 구축의 목적은 동일한 데이터를 가진 보통의 테이블과 Array화 된 테이블의 관리의 차이에따라 조회 성능과 시스템 리소스 사용의 효율성에 대해 비교하기 위해 데이터를 구축합니다.
+본 데이터 구축의 목적은 동일한 데이터를 가진 보통의 테이블과 Array화 된 테이블의 모델링의 차이에 따라 조회 성능과 시스템 리소스 사용의 효율성에 대해 비교하기 위해 데이터를 구축합니다.
+
+데이터 구축이 완료되었다면 다음 링크를 통하여 성능 테스트를 진행해 보도록 합니다.
+
+
 
 
