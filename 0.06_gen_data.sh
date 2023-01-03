@@ -13,18 +13,7 @@ echo "$0: START TIME : " $START_TM1
 psql -U udba -d skon -e > $LOGFILE 2>&1 <<-!
 
 select equipment.create_data(20,10);
-select equipment.create_data34(20,10);
-
---increasing 3 times
-INSERT INTO equipment.eq_data_raw_inc
-(line, eqp_cd, unit_cd, param_cd, processid, stepseq, root_nm, leaf_nm, act_time, param_value)
-select
-       line, eqp_cd, unit_cd, param_cd, processid, stepseq, root_nm, leaf_nm, act_time + '1 second'::interval, param_value
-from   equipment.eq_data_raw
-where  act_time >= '2022-01-01'::timestamp
-and    act_time  < '2022-03-01'::timestamp
-;
-
+-- select equipment.create_data34(20,10);
 
 INSERT INTO equipment.eq_data_raw_inc
 (line, eqp_cd, unit_cd, param_cd, processid, stepseq, root_nm, leaf_nm, act_time, param_value)
