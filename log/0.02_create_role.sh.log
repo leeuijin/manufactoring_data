@@ -1,0 +1,103 @@
+set optimizer= off;
+SET
+Timing is on.
+/* Drop Object*/
+DROP SCHEMA IF EXISTS  equipment CASCADE;
+DROP SCHEMA
+Time: 6.913 ms
+DROP ROLE IF EXISTS udba;
+ERROR:  role "udba" cannot be dropped because some objects depend on it
+DETAIL:  205 objects in database edu
+Time: 0.354 ms
+DROP ROLE IF EXISTS uadhoc;
+ERROR:  role "uadhoc" cannot be dropped because some objects depend on it
+DETAIL:  72 objects in database edu
+Time: 0.119 ms
+DROP ROLE IF EXISTS uoltp;
+ERROR:  role "uoltp" cannot be dropped because some objects depend on it
+DETAIL:  56 objects in database edu
+Time: 0.099 ms
+DROP RESOURCE QUEUE rqoltp;
+ERROR:  resource queue "rqoltp" is used by at least one role
+Time: 0.178 ms
+DROP RESOURCE QUEUE rqadhoc;
+ERROR:  resource queue "rqadhoc" is used by at least one role
+Time: 0.088 ms
+DROP RESOURCE QUEUE rqbatch;
+ERROR:  resource queue "rqbatch" is used by at least one role
+Time: 0.081 ms
+/* Resource Queue */
+CREATE RESOURCE QUEUE rqoltp WITH (ACTIVE_STATEMENTS=30,PRIORITY=MAX);
+ERROR:  resource queue "rqoltp" already exists
+Time: 0.124 ms
+CREATE RESOURCE QUEUE rqadhoc WITH (ACTIVE_STATEMENTS=30,PRIORITY=MEDIUM);
+ERROR:  resource queue "rqadhoc" already exists
+Time: 0.084 ms
+CREATE RESOURCE QUEUE rqbatch WITH (ACTIVE_STATEMENTS=30,PRIORITY=MIN);
+ERROR:  resource queue "rqbatch" already exists
+Time: 0.096 ms
+alter resource queue rqoltp with (ACTIVE_STATEMENTS=20, PRIORITY=MEDIUM);
+WARNING:  resource queue is disabled
+HINT:  To enable set gp_resource_manager=queue
+ALTER QUEUE
+Time: 6.623 ms
+alter resource queue rqbatch with (ACTIVE_STATEMENTS=10, PRIORITY=MEDIUM);
+WARNING:  resource queue is disabled
+HINT:  To enable set gp_resource_manager=queue
+ALTER QUEUE
+Time: 4.591 ms
+alter resource queue rqadhoc with (ACTIVE_STATEMENTS=5, PRIORITY=MAX);
+WARNING:  resource queue is disabled
+HINT:  To enable set gp_resource_manager=queue
+ALTER QUEUE
+Time: 4.399 ms
+CREATE RESOURCE GROUP rgoltp WITH (concurrency=30, cpu_rate_limit=30, memory_limit=0);
+ERROR:  resource group "rgoltp" already exists
+Time: 0.164 ms
+CREATE RESOURCE GROUP rgadhoc WITH (concurrency=30, cpu_rate_limit=20, memory_limit=0);
+ERROR:  resource group "rgadhoc" already exists
+Time: 0.092 ms
+CREATE RESOURCE GROUP rgbatch WITH (concurrency=30, cpu_rate_limit=10, memory_limit=0);
+ERROR:  resource group "rgbatch" already exists
+Time: 0.100 ms
+/* Role */
+CREATE ROLE uoltp   LOGIN ENCRYPTED PASSWORD 'uoltp'   RESOURCE QUEUE rqoltp;
+ERROR:  role "uoltp" already exists
+Time: 0.097 ms
+CREATE ROLE uadhoc  LOGIN ENCRYPTED PASSWORD 'uadhoc'  RESOURCE QUEUE rqadhoc;
+ERROR:  role "uadhoc" already exists
+Time: 0.078 ms
+CREATE ROLE udba    LOGIN ENCRYPTED PASSWORD 'udba'    RESOURCE QUEUE rqbatch;
+ERROR:  role "udba" already exists
+Time: 0.075 ms
+alter role udba with CREATEEXTTABLE;
+ALTER ROLE
+Time: 4.864 ms
+alter role uoltp  resource group rgoltp;
+ALTER ROLE
+Time: 5.468 ms
+alter role uadhoc resource group rgadhoc;
+ALTER ROLE
+Time: 5.761 ms
+alter role udba   resource group rgbatch;
+ALTER ROLE
+Time: 5.050 ms
+/* Schema */
+CREATE SCHEMA equipment;
+CREATE SCHEMA
+Time: 5.656 ms
+/* Role Configuration */
+
+
+
+/* Grant */
+GRANT ALL ON SCHEMA equipment TO uoltp ;
+GRANT
+Time: 7.290 ms
+GRANT ALL ON SCHEMA equipment TO uadhoc ;
+GRANT
+Time: 4.142 ms
+GRANT ALL ON SCHEMA equipment TO udba   ;
+GRANT
+Time: 4.144 ms
+Result:|./0.02_create_role.sh|2022-11-29 11:34:28|2022-11-29 11:34:28|0
