@@ -9,7 +9,7 @@ To build the manufacturing sample data, follow these steps:
 0.01_create_db.sh :  Create a test database \
 0.02_create_role.sh : Create schema and role \
 0.03_create_tbl.sh : Create test table \
-0.04_create_func.sh : generation_data function 생성 \
+0.04_create_func.sh : Create function using generation data  \
 0.05_gen_code.sh : Generation Metadata \
 0.06_gen_data.sh : Creating historical data ex)sensor data \
 0.07_gen_array.sh : Serialize the generated data(0.06_gen_data.sh) into a table through an array and build it into a separate new table \
