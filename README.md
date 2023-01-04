@@ -17,7 +17,7 @@ To build the manufacturing sample data, follow these steps:
 0.09_table_analyze.sh : Rebuild table analyze information \
 0.10_table_size.sh : Table Size Comparison (General Table & arrayed Table) 
 0.11_table_cnt.sh : Compare row count of sample data 
-crt_function.sql : A file with the create function syntax used in 0.04_create_func.sh 
+crt_function.sql : Create function file used in 0.04_create_func.sh 
 
 The purpose of this data construction is to build data to compare query performance and the efficiency of system resource usage based on the difference in management between normal and arrayed tables with the same data. \
 
