@@ -21,6 +21,16 @@ crt_function.sql : Create function file used in 0.04_create_func.sh
 
 The purpose of this data construction is to build data to compare query performance and the efficiency of system resource usage based on the difference in management between normal and arrayed tables with the same data. \
 
+
+
+
+
+
+
+
+
+
+
 전세계 많은 글로벌 제조회사들은 Greenplum 을 사용하고 있습니다.\
 제조사에서 많이 사용하는 사례를 기반으로 데이터를 구축하는 스크립트 및 예제를 제공합니다.\
 해당 샘플 테이블을 통하여 다양한 테스트를 진행할 수 있습니다.
